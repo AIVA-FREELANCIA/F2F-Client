@@ -2,7 +2,7 @@ import { StrictMode, useEffect, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles.css'
 
-const whatsappNumber = '919999999999'
+const whatsappNumber = '919121952424'
 const whatsappMessage = encodeURIComponent('Hi F2F Fitness, I want to start my fitness journey.')
 const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`
 
