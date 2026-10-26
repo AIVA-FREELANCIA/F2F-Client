@@ -1,4 +1,4 @@
-import { StrictMode, useState } from 'react'
+import { StrictMode, useEffect, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles.css'
 
@@ -34,13 +34,32 @@ const benefits = [
   ['04', 'Support Always', 'A coach in your corner when motivation gets tested.'],
 ]
 
+function LoadingScreen() {
+  return (
+    <div className="loading-screen" role="status" aria-live="polite">
+      <div className="loading-brand-mark">F2F</div>
+      <p className="loading-wordmark">FITNESS</p>
+      <div className="loading-line"><span></span></div>
+      <p className="loading-caption">FROM FAT TO FIT</p>
+    </div>
+  )
+}
+
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const minimumDisplay = new Promise((resolve) => setTimeout(resolve, 900))
+    const fontsReady = document.fonts?.ready ?? Promise.resolve()
+    Promise.all([minimumDisplay, fontsReady]).then(() => setIsLoading(false))
+  }, [])
 
   const closeMenu = () => setMenuOpen(false)
 
   return (
     <div className="site-shell">
+      {isLoading && <LoadingScreen />}
       <header className="nav-wrap">
         <a className="brand" href="#top" onClick={closeMenu} aria-label="F2F Fitness home">
           <span className="brand-mark">F2F</span>
